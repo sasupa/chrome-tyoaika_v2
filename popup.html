@@ -13,24 +13,24 @@
         <table class="table table-sm table-striped">
             <thead>
               <tr>
-                <th scope="col">Asiakas</th>
+                <th scope="col">Projekti</th>
                 <th scope="col"></th>
                 <th scope="col">Kesto</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="projektit">
               <tr>
-                <td>Anna Heiskari</td>
+                <td id="project1"></td>
                 <td>
-                  <button id="aStart" class="btn-success btn-sm" style="display: none;">Aloita</button>
-                  <button id="aStop" class="btn-warning btn-sm" style="display: none;">Tauko</button>
-                  <button id="aReset" class="btn-danger btn-sm">Reset</button>
-                  <button id="aTallenna" class="btn-info btn-sm">Kirjaa</button>
+                  <button id="Start" value="project1" class="btn-success btn-sm" style="display: none;">Aloita</button>
+                  <button id="Stop" value="project1" class="btn-warning btn-sm" style="display: none;">Tauko</button>
+                  <button id="Reset" class="btn-danger btn-sm">Reset</button>
+                  <button id="Tallenna" class="btn-info btn-sm">Kirjaa</button>
                 </td>
                 <td><span id="aTime">...</span></td>
               </tr>
               <tr>
-                <td>Benjamin Peltonen</td>
+                <td id="project2"></td>
                 <td>
                   <button id="bStart" class="btn-success btn-sm" style="display: none;">Aloita</button>
                   <button id="bStop" class="btn-warning btn-sm" style="display: none;">Tauko</button>
@@ -40,7 +40,7 @@
                 <td><span id="bTime">...</span></td>
               </tr>
               <tr>
-                <td>Ida Paul</td>
+                <td id="project3"></td>
                 <td>
                   <button id="iStart" class="btn-success btn-sm" style="display: none;">Aloita</button>
                   <button id="iStop" class="btn-warning btn-sm" style="display: none;">Tauko</button>
@@ -53,6 +53,7 @@
           </table>
           <small>&copy; 2020 Sasu Paakkunainen | Ilmoita bugeista sasupa@gmail.com</small>
           <script src="/jquery-3.4.1.min.js"></script>
+          <script src="/env.js"></script>
           <script src="/popup.js"></script>
 
     </div>

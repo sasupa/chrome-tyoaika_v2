@@ -1,8 +1,58 @@
+// RENDATAAN PROJEKTIT AVATESSA
+var x = 1;
+var active = "project" + x;
+for (let [key, value] of Object.entries(env)) {
+  if (key == active) {
+    if (value !== "") {
+      
+      var createId = "#" + active;
+      var startBtnId = "#start" + x;
+      var stopBtnId = "#stop" + x;
+      var resetBtnId = "#reset" + x;
+      var tallennaBtnId = "#tallenna" + x;
+      var timeId = "#time" + x;
+
+      var row = $('<tr/>', { id : rowId,});
+      var col1 = $('<td/>', { id : colId,});
+      var col2 = $('<td/>', { class : "className",});
+      var col3 = $('<td/>', { class : "className",});
+      var startButton =  $('<button/>', { class : "btn-success btn-sm", id : "Start", });
+      var stopButton =  $('<button/>', { class : "btn-warning btn-sm", id : "Stop", style : "display: none;"});
+      var resetButton =  $('<button/>', { class : "btn-danger btn-sm",});
+      var tallennaButton =  $('<button/>', { class : "btn-info btn-sm",});
+      var span = $('<span/>', { id : timeId,});
+
+      $(startButton).text("Aloita");
+      $(stopButton).text("Tauko");
+      $(resetButton).text("Reset");
+      $(tallennaButton).text("Kirjaa");
+      $("#projektit").append(row);
+      $(row).append(col1, col2, col3);
+      $(col1).text(value);
+      $(col2).append(startButton, stopButton, resetButton, tallennaButton);
+      $(col3).append(span);
+
+      x++;
+      active = "project" + x;
+      activeBtn = "project" + x + "Btn";
+    }
+  }
+
+  if (key == activeBtn) {
+    alert(value);
+    activeBtn = "project" + x + "Btn";
+  }
+
+}
+
 // RENDATAAN NAPIT AVATESSA
-chrome.storage.sync.get('annaBtn', function(result) {
-  if (result.annaBtn == true) { $( "#aStop" ).show(); $( "#aStart" ).hide(); }
-  else { $( "#aStart" ).show(); $( "#aStop" ).hide(); }
+chrome.storage.sync.get(env.project1Btn, function(result) {
+  var status = Object.values(result);
+  if (status == "true") { $( "#Stop" ).show(); $( "#Start" ).hide(); }
+  else { $( "#Start" ).show(); $( "#Stop" ).hide(); };
 });
+
+
 chrome.storage.sync.get('benjaminBtn', function(result) {
   if (result.benjaminBtn == true) { $( "#bStop" ).show(); $( "#bStart" ).hide(); }
   else { $( "#bStart" ).show(); $( "#bStop" ).hide(); }
@@ -20,7 +70,7 @@ var refresh = setInterval(function () {
 port.onMessage.addListener(function(msg) {
 
   // TÄSSÄ OTETAAN VASTAAN JA RENDATAAN AIKA BACKGROUND.JS:STÄ
-  $('#aTime').html(msg.annaTime);
+  $('#aTime').html(msg.project1Time);
   $('#bTime').html(msg.benjaminTime);
   $('#iTime').html(msg.idaTime);
 
@@ -29,9 +79,10 @@ port.onMessage.addListener(function(msg) {
 // TÄSSÄ ROUTATAAN FRONTIN NAPIT
 
 // ANNA
-$( "#aStart, #aStop" ).click(function() {
-  $( "#aStart, #aStop" ).toggle();
-  port.postMessage({msg: "aStartStop"});
+$( "#Start, #Stop" ).click(function() {
+  $( "#Start, #Stop" ).toggle();
+  var value = $(this).attr("value");
+  port.postMessage({msg: "StartStop", project: value});
 });
 
 $( "#aReset" ).click(function() {

@@ -119,9 +119,10 @@ class Timer {
 }
 
 
-// TÄSSÄ TEHDÄÄN ASIAKKAAN LASKURI
-const anna = new Timer(env.client1, 0, '00', "annaBtn");
-chrome.storage.sync.set({"annaBtn": false});
+// TÄSSÄ TEHDÄÄN PROJEKTIEN LASKURIT JA RENDAUSFILE STORAGEEN
+const project1 = new Timer(env.project1, 0, '00', env.project1Btn);
+chrome.storage.sync.set({[env.project1Btn]: false});
+
 const benjamin = new Timer(env.client2, 0, '00', "benjaminBtn");
 chrome.storage.sync.set({"benjaminBtn": false});
 const ida = new Timer(env.client3, 0, '00', "idaBtn");
@@ -135,21 +136,21 @@ chrome.runtime.onConnect.addListener(function(port) {
 
     if (e.msg == "Times") {
       // MUOTOILLAAN FRONTTIIN LÄHETETTÄVÄ AIKA
-      var annaCurrent = anna.hourOut + ":" + anna.minOut + ":" + anna.secOut;
+      var project1Current = project1.hourOut + ":" + project1.minOut + ":" + project1.secOut;
       var benjaminCurrent = benjamin.hourOut + ":" + benjamin.minOut + ":" + benjamin.secOut;
       var idaCurrent = ida.hourOut + ":" + ida.minOut + ":" + ida.secOut;
 
       // LÄHETETÄÄN AIKA
       port.postMessage({
-      annaTime: annaCurrent,
+      project1Time: project1Current,
       benjaminTime: benjaminCurrent,
       idaTime: idaCurrent
 
       });
 
       // ANNAN ROUTERIT
-    } else if (e.msg == "aStartStop") {
-      anna.counter();
+    } else if (e.msg == "StartStop") {
+      if (e.project == "project1") { project1.counter(); };
 
     } else if (e.msg == "aReset") {
       anna.reset();
