@@ -9,9 +9,8 @@
   <body>
     <div class="taulukko">
       
-        <h4>Työajan seuranta</h4>
-        <br>
-        <table class="table table-striped">
+        <h5 class="mb-3">Työajan seuranta</h5>
+        <table class="table table-sm table-striped">
             <thead>
               <tr>
                 <th scope="col">Asiakas</th>
@@ -40,9 +39,19 @@
                 </td>
                 <td><span id="bTime">...</span></td>
               </tr>
+              <tr>
+                <td>Ida Paul</td>
+                <td>
+                  <button id="iStart" class="btn-success btn-sm" style="display: none;">Aloita</button>
+                  <button id="iStop" class="btn-warning btn-sm" style="display: none;">Tauko</button>
+                  <button id="iReset" class="btn-danger btn-sm">Reset</button>
+                  <button id="iTallenna" class="btn-info btn-sm">Kirjaa</button>
+                </td>
+                <td><span id="iTime">...</span></td>
+              </tr>
             </tbody>
           </table>
-
+          <small>&copy; 2020 Sasu Paakkunainen | Ilmoita bugeista sasupa@gmail.com</small>
           <script src="/jquery-3.4.1.min.js"></script>
           <script src="/popup.js"></script>
 

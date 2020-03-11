@@ -120,10 +120,12 @@ class Timer {
 
 
 // TÄSSÄ TEHDÄÄN ASIAKKAAN LASKURI
-const anna = new Timer('Anna Heiskari', 0, '00', "annaBtn");
+const anna = new Timer(env.client1, 0, '00', "annaBtn");
 chrome.storage.sync.set({"annaBtn": false});
-const benjamin = new Timer('Benjamin Peltonen', 0, '00', "benjaminBtn");
+const benjamin = new Timer(env.client2, 0, '00', "benjaminBtn");
 chrome.storage.sync.set({"benjaminBtn": false});
+const ida = new Timer(env.client3, 0, '00', "idaBtn");
+chrome.storage.sync.set({"idaBtn": false});
 
 
 // TÄSSÄ API
@@ -135,11 +137,13 @@ chrome.runtime.onConnect.addListener(function(port) {
       // MUOTOILLAAN FRONTTIIN LÄHETETTÄVÄ AIKA
       var annaCurrent = anna.hourOut + ":" + anna.minOut + ":" + anna.secOut;
       var benjaminCurrent = benjamin.hourOut + ":" + benjamin.minOut + ":" + benjamin.secOut;
+      var idaCurrent = ida.hourOut + ":" + ida.minOut + ":" + ida.secOut;
 
       // LÄHETETÄÄN AIKA
       port.postMessage({
       annaTime: annaCurrent,
-      benjaminTime: benjaminCurrent
+      benjaminTime: benjaminCurrent,
+      idaTime: idaCurrent
 
       });
 
@@ -163,6 +167,17 @@ chrome.runtime.onConnect.addListener(function(port) {
     
     } else if (e.msg == "bTallenna") {
       benjamin.tallenna(e.kuvaus);
+
+
+      // IDAN ROUTERIT
+    } else if (e.msg == "iStartStop") {
+      ida.counter();
+    
+    } else if (e.msg == "iReset") {
+      ida.reset();
+    
+    } else if (e.msg == "iTallenna") {
+      ida.tallenna(e.kuvaus);
 
 
       // JOS JOKU ON RIKKI
