@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Hook tyoajan seuranta</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/popup.css">
+  </head>
+  <body>
+    <div class="taulukko">
+      
+        <h4>Työajan seuranta</h4>
+        <br>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Asiakas</th>
+                <th scope="col"></th>
+                <th scope="col">Kesto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Anna Heiskari</td>
+                <td>
+                  <button id="aStart" class="btn-success btn-sm" style="display: none;">Aloita</button>
+                  <button id="aStop" class="btn-warning btn-sm" style="display: none;">Tauko</button>
+                  <button id="aReset" class="btn-danger btn-sm">Reset</button>
+                  <button id="aTallenna" class="btn-info btn-sm">Kirjaa</button>
+                </td>
+                <td><span id="aTime">...</span></td>
+              </tr>
+              <tr>
+                <td>Benjamin Peltonen</td>
+                <td>
+                  <button id="bStart" class="btn-success btn-sm" style="display: none;">Aloita</button>
+                  <button id="bStop" class="btn-warning btn-sm" style="display: none;">Tauko</button>
+                  <button id="bReset" class="btn-danger btn-sm">Reset</button>
+                  <button id="bTallenna" class="btn-info btn-sm">Kirjaa</button>
+                </td>
+                <td><span id="bTime">...</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <script src="/jquery-3.4.1.min.js"></script>
+          <script src="/popup.js"></script>
+
+    </div>
+  </body>
+</html>
